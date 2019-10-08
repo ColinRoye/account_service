@@ -4,18 +4,17 @@ module.exports={
      verifyEmailBody:(key)=>{
           return 'validation key: <'+key+'>';
      },
-     verifySubject: "Please verify your email!";,
-     verifyAdmin: "auth@" + domain;,
+     verifySubject: "Please verify your email!",
+     verifyAdmin: ()=>{return "auth@" + module.exports.domain},
      verifyEmail: (key,email)=>{
           return {
-               from: verifyAdmin,
+               from: module.exports.verifyAdmin(),
                to: email,
-               subject: verifySubject,
-               text: verifyEmailBody(key),
+               subject: module.exports.verifySubject,
+               text: module.exports.verifyEmailBody(key),
           };
      },
      debugEmail: "croye@cs.stonybrook.edu",
      statusOk: {"status": "OK"},
      statusError: {"status":"ERROR"}
-
 }
