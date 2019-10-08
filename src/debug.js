@@ -1,7 +1,7 @@
 module.exports ={
-     print: (str)=>{
+     log: (str)=>{
           if(process.argv.includes("-d")){
-               console.log("DEBUG: " + str)
+               console.log("DEBUG: " + str + "\n")
           }
      }
 }

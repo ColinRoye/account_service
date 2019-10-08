@@ -1,1 +1,1 @@
-var debug = require("debug");
+const debug = require("debug");
