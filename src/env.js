@@ -15,6 +15,7 @@ module.exports={
           };
      },
      debugEmail: "croye@cs.stonybrook.edu",
-     statusOk: {"status": "OK"}
+     statusOk: {"status": "OK"},
+     statusError: {"status":"ERROR"}
 
 }
