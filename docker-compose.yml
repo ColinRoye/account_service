@@ -3,7 +3,10 @@ services:
   web:
    build: .
    ports: [ '3000:3000' ]
-   links: [ mongo ]
+   links: [ postfix, mongo ]
   mongo:
    image: mongo
    ports: [ '27017:27017' ]
+  postfix:
+   image: modularitycontainers/postfix
+   ports: [ '25:25' ]

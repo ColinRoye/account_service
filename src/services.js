@@ -6,8 +6,8 @@ const nodemailer = require('nodemailer');
 
 
 var transporter = nodemailer.createTransport({
-port: 25,
-host: 'localhost',
+port: 10025,
+host: 'postfix',
 tls: {
    rejectUnauthorized: false
 },
@@ -61,9 +61,13 @@ module.exports={
                     email = env.debugEmail;
                }
                debug.log("THIS IS SENDING TO THIS EMAIL: "+ email);
-               debug.log("EMAIL JSON: " + JSON.stringify(env.verifyEmail(email,key)));
+               debug.log("EMAIL JSON: " + JSON.stringify(env.verifyEmail(key,email)));
 
-               transporter.sendMail(env.verifyEmail(email,key));
+
+
+
+
+               transporter.sendMail(env.verifyEmail(key,email));
 
           }
 
