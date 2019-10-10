@@ -17,7 +17,6 @@ require('./src/schema.js');
 
 
 
-
 //optional port setting
 if(args.includes("-p")){
      port = args[args.indexOf("-p")+1];

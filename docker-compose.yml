@@ -1,12 +1,17 @@
 version: '2'
 services:
   web:
-   build: .
-   ports: [ '3000:3000' ]
-   links: [ postfix, mongo ]
+    image: node:11
+    volumes:
+      - .:/usr/src/service/
+    working_dir: /usr/src/service/
+    command: bash -c "npm install -g nodemon && nodemon server"
+    ports:
+     - 1234:1234
+     - 1235:1235
   mongo:
-   image: mongo
-   ports: [ '27017:27017' ]
+    image: mongo
+    ports: [ '27017:27017' ]
   postfix:
-   image: modularitycontainers/postfix
-   ports: [ '25:25' ]
+    image: modularitycontainers/postfix
+    ports: [ '25:25' ]

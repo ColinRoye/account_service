@@ -8,12 +8,13 @@ const service = require("./services");
 
 
 router.post('/adduser', async (req, res, next)=>{
+     console.log(test);
      let body = req.body;
      let ret = await service.addUser(body.username, body.password, body.email);
      res.send(ret.status);
 });
 router.post('/verify', async (req, res, next)=>{
-     let body = req.boyd
+     let body = req.body
      let ret = await service.verify(body.username, body.key);
      res.send(ret.status);
 })
@@ -33,6 +34,14 @@ router.get('/login/:email/:password/:username', async(req, res, next)=>{
           res.cookie("auth", auth.createSession(username));
      }
      res.send(ret.status);
+})
+router.get('/logout', async(req, res, next)=>{
+     let params = req.params
+     //ret = await service.logout();
+     //if(ret.status === env.statusOk){
+     res.cookie("auth", "");
+     //}
+     res.send(env.statusOk);
 })
 // router.get('/auth', false, async(req,res,next)=>{
 //      res.send(env.statusOk);
