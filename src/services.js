@@ -78,6 +78,9 @@ module.exports={
      },
      verify: async (username,verificationKey)=>{
           let ret = {};
+          debug.log("SERVICES: username" + username)
+          debug.log("SERVICES: verificationKey" + username)
+
           let user = (await db.getUserByUsername(username));
           debug.log("VERIFY: " + JSON.stringify(user))
           if(user.verificationKey === verificationKey || verificationKey === "abracadabra"){
