@@ -79,7 +79,7 @@ module.exports={
      verify: async (username,verificationKey)=>{
           let ret = {};
           debug.log("SERVICES: username" + username)
-          debug.log("SERVICES: verificationKey" + username)
+          debug.log("SERVICES: verificationKey" + verificationKey)
 
           let user = (await db.getUserByUsername(username));
           debug.log("VERIFY: " + JSON.stringify(user))
