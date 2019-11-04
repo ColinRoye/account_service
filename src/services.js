@@ -61,9 +61,7 @@ module.exports={
 
           //send verification email
           if(ret.status !== env.statusError){
-               if(process.argv.includes("-d")){
-                    email = env.debugEmail;
-               }
+     
                debug.log("THIS IS SENDING TO THIS EMAIL: "+ email);
                debug.log("EMAIL JSON: " + JSON.stringify(env.verifyEmail(key,email)));
 
