@@ -15,10 +15,10 @@ router.post('/adduser', async (req, res, next)=>{
 router.post('/verify', async (req, res, next)=>{
      let body = req.body
      debug.log("ROUTES: verification key " + body.key)
-     debug.log("ROUTES: username " + body.username)
+     debug.log("ROUTES: email " + body.email)
      debug.log("ROUTES: body " + JSON.stringify(body))
 
-     let ret = await service.verify(body.username, body.key);
+     let ret = await service.verify(body.email, body.key);
      res.send(ret.status);
 })
 router.post('/login', async (req, res, next)=>{
