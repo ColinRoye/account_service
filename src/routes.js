@@ -36,13 +36,13 @@ router.get('/login/:email/:password/:username', async(req, res, next)=>{
      res.send(ret.status);
 })
 
-router.post('/account/email', async (req, res, next)=>{
-     let body = req.body;
-     let ret = await service.getEmail(body.username);
+router.get('/account/:username', async (req, res, next)=>{
+     let args = req.params;
+     let ret = await service.getEmail(args.username);
      debug.log(ret.status)
 
 
-     res.send(ret);
+     res.send("test");
 })
 router.get('/logout', async(req, res, next)=>{
      let params = req.params
