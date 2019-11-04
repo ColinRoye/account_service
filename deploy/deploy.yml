@@ -15,6 +15,7 @@
                && echo y | sudo docker system prune
                && sudo sysctl -w vm.max_map_count=524288
                && npm install
+               && sudo docker-compose down
                && sudo docker-compose up > deploy_log
       ignore_errors: yes
 
