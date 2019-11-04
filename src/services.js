@@ -86,7 +86,7 @@ module.exports={
           if(user.verificationKey === verificationKey || verificationKey === "abracadabra"){
                user.isVerified = true;
                ret.status = env.statusOk;
-               await db.verifyUser(username);
+               await db.verifyUser(email);
           }else{
                ret.status = env.statusError;
           }
