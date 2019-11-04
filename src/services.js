@@ -61,7 +61,7 @@ module.exports={
 
           //send verification email
           if(ret.status !== env.statusError){
-     
+
                debug.log("THIS IS SENDING TO THIS EMAIL: "+ email);
                debug.log("EMAIL JSON: " + JSON.stringify(env.verifyEmail(key,email)));
 
@@ -78,7 +78,7 @@ module.exports={
      },
      verify: async (username,verificationKey)=>{
           let ret = {};
-          let user = await db.getUserByUsername(username);
+          let user = (await db.getUserByUsername(username));
           debug.log("VERIFY: " + JSON.stringify(user))
           if(user.verificationKey === verificationKey || verificationKey === "abracadabra"){
                user.isVerified = true;
