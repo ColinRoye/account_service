@@ -39,7 +39,7 @@ router.get('/login/:email/:password/:username', async(req, res, next)=>{
 router.get('/account/:username', async (req, res, next)=>{
      let args = req.params;
      let ret = await service.getEmail(args.username);
-     debug.log(ret.status)
+     debug.log(ret)
 
 
      res.send("test");

@@ -2,9 +2,9 @@
 - hosts: app
   become: true
   tasks:
-    - name: Install required system packages
-      apt: name={{ item }} state=latest update_cache=yes
-      loop: [ 'docker', 'docker-compose', 'nodejs']
+    # - name: Install required system packages
+    #   apt: name={{ item }} state=latest update_cache=yes
+    #   loop: [ 'docker', 'docker-compose', 'nodejs']
 
     - git:
         repo: https://github.com/ColinRoye/account_service
@@ -12,10 +12,10 @@
         force: yes
     - name: Run mix commands
       shell: cd /app
-               && sudo docker system prune
+               && echo y | sudo docker system prune
                && sudo sysctl -w vm.max_map_count=524288
                && npm install
-               && sudo nohup docker-compose up --build&
+               && sudo docker-compose up > deploy_log
       ignore_errors: yes
 
       become: True
