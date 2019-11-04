@@ -43,7 +43,12 @@ module.exports={
 
      },
      getEmail: async (username)=>{
-          return (await db.getUserByUsername(username)).email;
+          let user = (await db.getUserByUsername(username));
+          if(user){
+               return user.email
+          }else{
+               return "";
+          }
      },
      addUser: async (username, password, email)=>{
           let key = uuid();
