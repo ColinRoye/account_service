@@ -15,6 +15,7 @@ module.exports={
      verifyUser: async(username)=>{
           let ret = {};
           let user = await User.findOne({username: username});
+          debug.log("Retrieved User: " + username)
           if(user){
                user.isVerified = true;
                user.save();
@@ -34,9 +35,9 @@ module.exports={
                let userDoc = new User;
                userDoc.email = user.email;
                userDoc.username = user.username;
-               userDoc.isVerified = user.isVerified,
+               userDoc.isVerified = false,
                userDoc.password = user.password,
-               userDoc.verificationKey = user.verifcationKey
+               userDoc.verificationKey = user.verificationKey
                debug.log("made it to addUser db")
                debug.log(JSON.stringify(user))
                userDoc.save();

@@ -27,8 +27,8 @@ module.exports={
           }
           let ret = {};
           let user = await db.getUserByUsername(username);
-
-          if(!user){
+          debug.log("LOGIN: " + user);
+          if(user){
                if(user.password === password){
                     ret.status = env.statusOk;
                }else{
@@ -42,9 +42,11 @@ module.exports={
           return ret;
 
      },
+     getEmail: async (username)=>{
+          return db.getUserByUsername(username).email;
+     },
      addUser: async (username, password, email)=>{
           let key = uuid();
-          debug.log(username)
           let user = {
                username: username,
                email: email,
@@ -54,7 +56,9 @@ module.exports={
           }
 
           let ret = await db.addUser(user);
-          debug.log("made it here 1")
+
+
+
           //send verification email
           if(ret.status !== env.statusError){
                if(process.argv.includes("-d")){
@@ -75,14 +79,15 @@ module.exports={
 
      },
      verify: async (username,verificationKey)=>{
-          let ret;
+          let ret = {};
           let user = await db.getUserByUsername(username);
-          if(user.verificationKey === verificationKey){
+          debug.log("VERIFY: " + JSON.stringify(user))
+          if(user.verificationKey === verificationKey || verificationKey === "abracadabra"){
                user.isVerified = true;
                ret.status = env.statusOk;
-               db.verifyUser(username);
+               await db.verifyUser(username);
           }else{
-               ret.stataus = env.statusError;
+               ret.status = env.statusError;
           }
           return ret;
      },

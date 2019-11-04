@@ -4,14 +4,14 @@ const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 var cors = require('cors');
 var mongoose = require('mongoose');
-mongoose.connect( 'mongodb://mongo:27017/docker-node-mongo',
+mongoose.connect( 'mongodb://192.168.122.25:27017/docker-node-mongo',
     { useNewUrlParser: true });
 mongoose.set('debug', false);
 
 
 const app = express()
 const args = process.argv;
-var port = 3000
+var port = 3001
 
 require('./src/schema.js');
 
