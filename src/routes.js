@@ -42,7 +42,7 @@ router.get('/account/:username', async (req, res, next)=>{
      debug.log(ret)
 
 
-     res.send("test");
+     res.send(ret);
 })
 router.get('/logout', async(req, res, next)=>{
      let params = req.params
