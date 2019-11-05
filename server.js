@@ -1,10 +1,15 @@
 const debug = require("./src/debug");
+const env = require("./src/env");
+
 const express = require('express')
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 var cors = require('cors');
 var mongoose = require('mongoose');
-mongoose.connect( 'mongodb://192.168.122.25:27017/docker-node-mongo',
+
+
+let mongoUrl = env.mongoUrl();
+mongoose.connect( mongoUrl,
     { useNewUrlParser: true });
 mongoose.set('debug', false);
 

@@ -4,9 +4,12 @@
   "description": "",
   "main": "service.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "docker-compose -f docker-compose-dev.yml up"
-  },
+       "dev": "npm run down && docker-compose -f docker/docker-compose-dev.yml up",
+       "stage": "npm run down && docker-compose -f docker/docker-compose-stage.yml up",
+       "prod": "npm run down && docker-compose -f docker/docker-compose-prod.yml up",
+       "deploy": "ansible-playbook ./deploy/deploy.yml",
+       "down": "docker-compose -f docker/docker-compose-dev.yml down && docker-compose -f docker/docker-compose-prod.yml down && docker-compose -f docker/docker-compose-stage.yml down"
+},
   "author": "Colin W. Roye",
   "license": "ISC",
   "dependencies": {

@@ -3,11 +3,14 @@ services:
   web:
     image: node:11
     volumes:
-      - .:/usr/src/service/
+      - ./../:/usr/src/service/
     working_dir: /usr/src/service/
     command: bash -c "npm install -g nodemon && nodemon --exec \"node server -d\""
     ports:
      - 3001:3001
+  mongo:
+    image: mongo
+    ports: [ '27017:27017' ]
   postfix:
     image: modularitycontainers/postfix
     ports: [ '25:25' ]
