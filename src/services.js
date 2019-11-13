@@ -17,15 +17,19 @@ tls: {
 module.exports={
      login: async (username, password)=>{
           debug.log("USERNAME:"+username)
+          let ret = {};
+
           if(!username){
                debug.log("username can't be blank");
-               return env.statusError;
+               ret.status = env.statusError
+
+               return ret;
           }
           if(!password){
                debug.log("pass can't be blank");
-               return env.statusError;
+               ret.status = env.statusError
+               return ret;
           }
-          let ret = {};
           let user = await db.getUserByUsername(username);
           debug.log("LOGIN: " + user);
           if(user){
@@ -73,8 +77,12 @@ module.exports={
 
 
 
+                 await transporter.sendMail(env.verifyEmail(key,email)).catch((e)=>{
+                   ret.status = env.statusError
+                 });
 
-               transporter.sendMail(env.verifyEmail(key,email));
+
+
 
           }
 
@@ -88,7 +96,7 @@ module.exports={
 
           let user = (await db.getUserByEmail(email));
           debug.log("VERIFY: " + JSON.stringify(user))
-          if(user.verificationKey === verificationKey || verificationKey === "abracadabra"){
+          if(user && user.verificationKey === verificationKey || verificationKey === "abracadabra"){
                user.isVerified = true;
                ret.status = env.statusOk;
                await db.verifyUser(email);
