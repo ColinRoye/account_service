@@ -32,7 +32,7 @@ module.exports={
           }
           let user = await db.getUserByUsername(username);
           debug.log("LOGIN: " + user);
-          if(user){
+          if(user!=null && user.isVerified){
                if(user.password === password){
                     ret.status = env.statusOk;
                }else{
@@ -96,7 +96,7 @@ module.exports={
 
           let user = (await db.getUserByEmail(email));
           debug.log("VERIFY: " + JSON.stringify(user))
-          if(user && user.verificationKey === verificationKey || verificationKey === "abracadabra"){
+          if((user && user.verificationKey === verificationKey) || (user && verificationKey === "abracadabra")){
                user.isVerified = true;
                ret.status = env.statusOk;
                await db.verifyUser(email);

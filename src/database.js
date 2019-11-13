@@ -12,11 +12,11 @@ module.exports={
      getUserByEmail: async(email)=>{
           return await User.findOne({email: email})
      },
-     verifyUser: async(username)=>{
+     verifyUser: async(email)=>{
           let ret = {};
-          let user = await User.findOne({username: username});
-          debug.log("Retrieved User: " + username)
-          if(user){
+          let user = await User.findOne({email: email});
+          debug.log("Retrieved User: " + user)
+          if(user!=null){
                user.isVerified = true;
                user.save();
                ret.status = env.statusOk;
